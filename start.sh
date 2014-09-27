@@ -2,4 +2,4 @@
 
 set -e
 
-mono /opt/NzbDrone/NzbDrone.exe
+mono /opt/NzbDrone/NzbDrone.exe -nobrowswer -data=/config
