@@ -17,9 +17,9 @@ RUN update-locale LANG=en_US.UTF-8
 RUN dpkg-reconfigure locales
 
 # Update Ubuntu
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFF && \
-  echo 'deb http://update.nzbdrone.com/repos/apt/debian master main' > /etc/apt/sources.list.d/nzbdrone.list && \
-  RUN apt-get -q update
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
+  echo 'deb http://update.nzbdrone.com/repos/apt/debian master main' > /etc/apt/sources.list.d/nzbdrone.list
+RUN apt-get -q update
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get -qy --force-yes dist-upgrade
 
