@@ -25,7 +25,7 @@ RUN apt-get -qy --force-yes dist-upgrade
 
 # Install nzbdrone 
 RUN usermod -m -d /config nobody
-RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone
+RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone && chown -R nobody:users /opt/NzbDrone
 
 ADD ./start.sh /start.sh
 RUN chmod a+x  /start.sh
