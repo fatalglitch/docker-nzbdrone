@@ -29,6 +29,7 @@ RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone supervisor && chown
 
 # Add config files
 ADD ./files/supervisord.conf /etc/supervisor/conf.d/common.conf
+ADD ./files/nzbdrone-supervisor.conf /etc/supervisor/conf.d/nzbdrone.conf
 ADD ./files/start.sh /start.sh
 RUN chmod a+x  /start.sh
 

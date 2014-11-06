@@ -3,6 +3,7 @@
 ## Description:
 
 This is a Dockerfile for "NzbDrone" - (http://http://nzbdrone.com/)
+The resulting container uses supervisor in order to restart nzbdrone after an upgrade has occur.
 Specifically for use within an unRAID environment.
 
 ## Build from docker file:
