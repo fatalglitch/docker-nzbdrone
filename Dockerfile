@@ -25,13 +25,13 @@ RUN apt-get -qy --force-yes dist-upgrade
 
 # Install nzbdrone 
 RUN usermod -m -d /config nobody
-RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone
+RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone supervisor
 
-ADD ./start.sh /start.sh
+# Add config files
+ADD ./files/supervisord.conf /etc/supervisor/conf.d/common.conf
+ADD ./files/start.sh /start.sh
 RUN chmod a+x  /start.sh
 
 VOLUME /config
 
-# DON'T RUN AS ROOT
-USER nobody
 ENTRYPOINT ["/start.sh"]
