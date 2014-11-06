@@ -25,7 +25,7 @@ RUN apt-get -qy --force-yes dist-upgrade
 
 # Install nzbdrone 
 RUN usermod -m -d /config nobody
-RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone supervisor
+RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone supervisor && chown -R nobody:users /opt/NzbDrone
 
 # Add config files
 ADD ./files/supervisord.conf /etc/supervisor/conf.d/common.conf
