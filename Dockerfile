@@ -26,12 +26,15 @@ RUN apt-get -qy --force-yes dist-upgrade
 # Install nzbdrone 
 RUN usermod -m -d /config nobody
 RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone supervisor && chown -R nobody:users /opt/NzbDrone
+RUN mkdir /scripts && chown -R nobody:users /scripts
 
 # Add config files
-ADD ./files/supervisord.conf /etc/supervisor/conf.d/common.conf
+ADD ./files/supervisord.conf /etc/supervisor/supervisord.conf
 ADD ./files/nzbdrone-supervisor.conf /etc/supervisor/conf.d/nzbdrone.conf
+ADD ./files/sonnar-update.sh /scripts/sonnar-update.sh
 ADD ./files/start.sh /start.sh
 RUN chmod a+x  /start.sh
+RUN chmod a+x /scripts/sonnar-update.sh
 
 VOLUME /config
 
