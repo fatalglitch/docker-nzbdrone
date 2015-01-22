@@ -4,7 +4,7 @@
  
 echo "updating sonarr"
 rm -Rfv /opt/NzbDrone/*
-mv $2/NzbDrone/* /opt/NzbDrone/
+mv /tmp/nzbdrone_update/NzbDrone/* /opt/NzbDrone/
  
 echo "Using supervisorctl to restart sonarr"
 supervisorctl stop nzbdrone
