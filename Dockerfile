@@ -31,10 +31,11 @@ RUN mkdir /scripts && chown -R nobody:users /scripts
 # Add config files
 ADD ./files/supervisord.conf /etc/supervisor/supervisord.conf
 ADD ./files/nzbdrone-supervisor.conf /etc/supervisor/conf.d/nzbdrone.conf
-ADD ./files/sonnar-update.sh /scripts/sonnar-update.sh
+ADD ./files/sonarr-update.sh /scripts/sonarr-update.sh
 ADD ./files/start.sh /start.sh
+ADD ./files/setup.d/sonarr /etc/setup.d/sonarr
 RUN chmod a+x  /start.sh
-RUN chmod a+x /scripts/sonnar-update.sh
+RUN chmod a+x /scripts/sonarr-update.sh
 
 VOLUME /config
 
