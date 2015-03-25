@@ -39,4 +39,6 @@ RUN chmod a+x /scripts/sonarr-update.sh
 
 VOLUME /config
 
+EXPOSE 8083
+
 ENTRYPOINT ["/start.sh"]
