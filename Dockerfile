@@ -34,6 +34,7 @@ ADD ./files/nzbdrone-supervisor.conf /etc/supervisor/conf.d/nzbdrone.conf
 ADD ./files/sonarr-update.sh /scripts/sonarr-update.sh
 ADD ./files/start.sh /start.sh
 ADD ./files/setup.d/sonarr /etc/setup.d/sonarr
+ADD ./files/config.xml /config.xml
 RUN chmod a+x  /start.sh
 RUN chmod a+x /scripts/sonarr-update.sh
 

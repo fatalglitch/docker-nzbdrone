@@ -7,13 +7,7 @@ if [ -f /config/config.xml ]; then
 	sed -i -e 's%<UpdateScriptPath>.*</UpdateScriptPath>%<UpdateScriptPath>/scripts/sonarr-update.sh</UpdateScriptPath>%' /config/config.xml
 else
 	echo "Creating a basic config file."
-	echo '<?xml version="3.0" encoding="utf-8" standalone="yes"?>' > /config/config.xml
-	echo '<Config>' >> /config/config.xml
-	echo '  <Port>8083</Port>' >> /config/config.xml
-	echo '  <UpdateMechanism>Script</UpdateMechanism>' >> /config/config.xml
-	echo '  <UpdateScriptPath>/scripts/sonarr-update.sh</UpdateScriptPath>' >> /config/config.xml
-	echo '  <BindAddress>*</BindAddress>' >> /config/config.xml
-	echo '</Config>' >> /config/config.xml
+	cp /config.xml /config/config.xml
 fi
 echo "Using following config options:"
 cat /config/config.xml
