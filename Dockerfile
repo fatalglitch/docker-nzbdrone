@@ -1,45 +1,24 @@
-# Builds a docker image for NzbDrone
-FROM ubuntu:trusty
+# Builds a docker image for Sonarr
+FROM phusion/baseimage:0.9.16
 MAINTAINER Carlos Hernandez <carlos@techbyte.ca>
 
-# Let the container know that there is no tty
-ENV DEBIAN_FRONTEND noninteractive
+#########################################
+##        ENVIRONMENTAL CONFIG         ##
+#########################################
+# Set correct environment variables
+ENV HOME="/root" LC_ALL="C.UTF-8" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
 
-# Set user nobody to uid and gid of unRAID
-RUN usermod -u 99 nobody
-RUN usermod -g 100 nobody
+# Use baseimage-docker's init system
+CMD ["/sbin/my_init"]
 
-# Set locale
-ENV LANGUAGE en_US.UTF-8
-ENV LANG en_US.UTF-8
-RUN locale-gen en_US en_US.UTF-8
-RUN update-locale LANG=en_US.UTF-8
-RUN dpkg-reconfigure locales
+#########################################
+##         RUN INSTALL SCRIPT          ##
+#########################################
+COPY install.sh /tmp/
+RUN chmod +x /tmp/install.sh && /tmp/install.sh && rm /tmp/install.sh
 
-# Update Ubuntu
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
-  echo 'deb http://update.nzbdrone.com/repos/apt/debian master main' > /etc/apt/sources.list.d/nzbdrone.list
-RUN apt-get -q update
-RUN apt-mark hold initscripts udev plymouth mountall
-RUN apt-get -qy --force-yes dist-upgrade
-
-# Install nzbdrone 
-RUN usermod -m -d /config nobody
-RUN apt-get install -qy --force-yes libmono-cil-dev nzbdrone supervisor && chown -R nobody:users /opt/NzbDrone
-RUN mkdir /scripts && chown -R nobody:users /scripts
-
-# Add config files
-ADD ./files/supervisord.conf /etc/supervisor/supervisord.conf
-ADD ./files/nzbdrone-supervisor.conf /etc/supervisor/conf.d/nzbdrone.conf
-ADD ./files/sonarr-update.sh /scripts/sonarr-update.sh
-ADD ./files/start.sh /start.sh
-ADD ./files/setup.d/sonarr /etc/setup.d/sonarr
-ADD ./files/config.xml /config.xml
-RUN chmod a+x  /start.sh
-RUN chmod a+x /scripts/sonarr-update.sh
-
+#########################################
+##               VOLUMES               ##
+#########################################
 VOLUME /config
-
 EXPOSE 8083
-
-ENTRYPOINT ["/start.sh"]
