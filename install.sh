@@ -49,7 +49,7 @@ echo "Configuring Options for Sonarr container."
 PORT=${SR_PORT:-8083}
 if [ -f /config/config.xml ]; then
         echo "Config exists, editing it."
-        sed -i -e 's%<Port>.*</Port>%<Port>${PORT}</Port>%' /config/config.xml
+        sed -i -e "s%<Port>.*</Port>%<Port>${PORT}</Port>%" /config/config.xml
         sed -i -e 's%<UpdateMechanism>.*</UpdateMechanism>%<UpdateMechanism>Script</UpdateMechanism>%' /config/config.xml
         sed -i -e 's%<UpdateScriptPath>.*</UpdateScriptPath>%<UpdateScriptPath>/scripts/sonarr-update.sh</UpdateScriptPath>%' /config/config.xml
 else
